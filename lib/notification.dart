@@ -34,6 +34,7 @@ class FlutterLocalNotification{
           sound: true,
         );
   }
+
   static Future<void> showNotification() async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channel id', 'channel name',
@@ -47,7 +48,7 @@ class FlutterLocalNotification{
         iOS: DarwinNotificationDetails(badgeNumber: 1));
 
     await flutterLocalNotificationsPlugin.show(
-        0, 'test title', 'test body', notificationDetails);
+        0, 'AVO', '아이가 울고 있는 소리가 감지됐어요!\n아이에게 한 번 가보세요.', notificationDetails);
   }
   
 }

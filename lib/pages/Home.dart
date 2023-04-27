@@ -1,3 +1,4 @@
+import 'package:avo_front/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,15 @@ void onOFF() {}
 void goToSetting() {}
 
 class _HomePageState extends State<HomePage> {
+  void initState() {
+    // 초기화
+    FlutterLocalNotification.init();
+
+    // 3초 후 권한 요청
+    Future.delayed(const Duration(seconds: 1),
+        FlutterLocalNotification.requestNotificationPermission());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -25,9 +35,8 @@ class _HomePageState extends State<HomePage> {
             child: Image(image: AssetImage('images/logo.png'), width: w * 0.3)),
         Image(image: (AssetImage('images/avo_4.png')), width: w * 0.9),
         ElevatedButton(
-            onPressed: () {
-              onOFF();
-            },
+            onPressed: () =>
+              FlutterLocalNotification.showNotification(),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.all(10),
               minimumSize: Size(w * 0.9, h * 0.2),
