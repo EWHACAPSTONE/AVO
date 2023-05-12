@@ -1,26 +1,17 @@
-import 'package:avo_front/notification.dart';
+import 'package:avo_front/utils/notification.dart';
+import 'package:avo_front/utils/setting_vibration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vibration/vibration.dart';
+import 'package:http/http.dart' as http;
+import 'package:system_settings/system_settings.dart';
 
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-void onOFF() {}
-
-void goToSetting() {}
-
 class _HomePageState extends State<HomePage> {
-  void initState() {
-    // 초기화
-    FlutterLocalNotification.init();
-
-    // 3초 후 권한 요청
-    Future.delayed(const Duration(seconds: 1),
-        FlutterLocalNotification.requestNotificationPermission());
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -35,8 +26,7 @@ class _HomePageState extends State<HomePage> {
             child: Image(image: AssetImage('images/logo.png'), width: w * 0.3)),
         Image(image: (AssetImage('images/avo_4.png')), width: w * 0.9),
         ElevatedButton(
-            onPressed: () =>
-              FlutterLocalNotification.showNotification(),
+            onPressed: SystemSettings.app,
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.all(10),
               minimumSize: Size(w * 0.9, h * 0.2),
@@ -102,9 +92,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 )),
             ElevatedButton(
-                onPressed: () {
-                  onOFF();
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(10),
                   minimumSize: Size(w * 0.45, h * 0.3),
