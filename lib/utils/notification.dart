@@ -1,4 +1,7 @@
+import 'package:avo_front/utils/VibrateControllerWithGetX.dart';
+import 'package:avo_front/utils/setting_vibration.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 
 class FlutterLocalNotification{
   FlutterLocalNotification._();
@@ -42,8 +45,8 @@ class FlutterLocalNotification{
             importance: Importance.max,
             priority: Priority.max,
             showWhen: false);
-
-    const NotificationDetails notificationDetails = NotificationDetails(
+final controller = Get.put((VibrateControllerWithGetX()));
+    const NotificationDetails notificationDetails = NotificationDetails (
         android: androidNotificationDetails,
         iOS: DarwinNotificationDetails(badgeNumber: 1));
 switch(situation){
@@ -51,14 +54,17 @@ switch(situation){
   case "shouting":
       await flutterLocalNotificationsPlugin.show(
         0, 'AVO', '아이가 소리지르는게 감지됐어요!\n아이에게 한 번 가보세요.', notificationDetails);
+       SettingVibration.setVibrate('한 번 진동');
         break;
   case "crying":
       await flutterLocalNotificationsPlugin.show(
         0, 'AVO', '아이가 울고 있는 소리가 감지됐어요!\n아이에게 한 번 가보세요.', notificationDetails);
+        SettingVibration.setVibrate('연속 진동');
   break;
     case "calling":
       await flutterLocalNotificationsPlugin.show(
         0, 'AVO', '아이가 부르는 소리가 감지됐어요!\n아이에게 한 번 가보세요.', notificationDetails);
+        SettingVibration.setVibrate('연속 진동');
   break;
 
 }
