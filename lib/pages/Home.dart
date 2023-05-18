@@ -12,6 +12,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+      void initState() {
+    FlutterLocalNotification.init();
+    Future.delayed(const Duration(seconds: 1),
+        FlutterLocalNotification.requestNotificationPermission());
+    super.initState();
+  }
+
+  void getNotification() async{
+    var url = Uri.parse('http://52.78.239.63:8080/status');
+    var response = await http.get(url);
+
+   if(response.statusCode == 200){
+    print(response.body);
+    FlutterLocalNotification.showNotification(response.body);
+   }
+  }
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
