@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 )),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {Get.toNamed('/info');},
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(10),
                   minimumSize: Size(w * 0.45, h * 0.3),
