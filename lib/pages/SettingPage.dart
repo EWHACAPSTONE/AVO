@@ -1,29 +1,15 @@
+import 'package:avo_front/controller/DropdownButtonController.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class settingPage extends StatefulWidget {
-  @override
-  State<settingPage> createState() => _settingPageState();
-}
+import '../utils/DropdownButtonWidget.dart';
 
-class _settingPageState extends State<settingPage> {
-  final _options = ['한 번 진동', '두 번 진동', '세 번 진동', '연속 진동'];
-  String _crySelected = '';
-  String _callSelected = '';
-  String _shoutSelected = '';
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _crySelected = _options[0];
-      _callSelected = _options[0];
-      _shoutSelected = _options[0];
-    });
-  }
+class settingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DropdownButtonController());
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -65,119 +51,18 @@ class _settingPageState extends State<settingPage> {
               children: [
                 SizedBox(height: 20),
                 dropdownTitle("아이가 울어요"),
-                Container(
-                  width: w * 0.6,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.8),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                            spreadRadius: 0)
-                      ]),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                       iconSize: 50,
-                      iconEnabledColor: Colors.black,
-                      style: TextStyle(
-                          fontFamily: 'NanumSquare',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black),
-                      dropdownColor: Color.fromRGBO(255, 255, 255, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                      value: _crySelected,
-                      items: _options
-                          .map(
-                              (e) => DropdownMenuItem(value: e, child: Text(e)))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _crySelected = value!;
-                        });
-                      },
-                    ),
-                  ),
+                Obx(
+                  ()=> DropdownButtonWidget( selectedValue: controller.crySelected.value,
+                            onChanged: (value) => controller.updateCrySelected(value!),),
                 ),
                 dropdownTitle("아이가 불러요"),
-                Container(
-                  width: w * 0.6,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.8),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                            spreadRadius: 0)
-                      ]),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      iconSize: 50,
-                      iconEnabledColor: Colors.black,
-                      style: TextStyle(
-                          fontFamily: 'NanumSquare',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black),
-                      dropdownColor: Color.fromRGBO(255, 255, 255, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                      value: _callSelected,
-                      items: _options
-                          .map(
-                              (e) => DropdownMenuItem(value: e, child: Text(e)))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _callSelected = value!;
-                        });
-                      },
-                    ),
-                  ),
+                Obx
+                (()=>DropdownButtonWidget(selectedValue:controller.callSelected.value,
+                            onChanged: (value) => controller.updateCallSelected(value!),),
                 ),
                 dropdownTitle("아이가 소리질러요"),
-                Container(
-                  width: w * 0.6,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.8),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.25),
-                            blurRadius: 5,
-                            offset: Offset(0, 5),
-                            spreadRadius: 0)
-                      ]),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                       iconSize: 50,
-                      iconEnabledColor: Colors.black,
-                      style: TextStyle(
-                          fontFamily: 'NanumSquare',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black),
-                      dropdownColor: Color.fromRGBO(255, 255, 255, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                      value: _shoutSelected,
-                      items: _options
-                          .map(
-                              (e) => DropdownMenuItem(value: e, child: Text(e)))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _shoutSelected = value!;
-                        });
-                      },
-                    ),
-                  ),
-                )
+                 Obx(() =>   DropdownButtonWidget(selectedValue: controller.shoutSelected.value,
+            onChanged: (value) => controller.updateShoutSelected(value!),)),
               ],
             ))
       ],
