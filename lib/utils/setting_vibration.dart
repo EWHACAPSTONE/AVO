@@ -11,16 +11,16 @@ class SettingVibration {
       case "두 번 진동":
         if (await Vibration.hasVibrator() ?? true) {
           Vibration.vibrate();
-          await Future.delayed(const Duration(milliseconds: 1000));
+          await Future.delayed(const Duration(milliseconds: 800));
           Vibration.vibrate();
         }
         break;
       case "세 번 진동":
         if (await Vibration.hasVibrator() ?? true) {
           Vibration.vibrate();
-          await Future.delayed(const Duration(milliseconds: 1000));
+          await Future.delayed(const Duration(milliseconds: 800));
           Vibration.vibrate();
-          await Future.delayed(const Duration(milliseconds: 1000));
+          await Future.delayed(const Duration(milliseconds: 800));
           Vibration.vibrate();
         }
         break;
