@@ -1,4 +1,3 @@
-import 'package:avo_front/utils/notification.dart';
 import 'package:avo_front/utils/setting_vibration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,22 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-      void initState() {
-    FlutterLocalNotification.init();
-    Future.delayed(const Duration(seconds: 1),
-        FlutterLocalNotification.requestNotificationPermission());
-    super.initState();
-  }
 
-  void getNotification() async{
-    var url = Uri.parse('http://52.78.239.63:8080/status');
-    var response = await http.get(url);
-
-   if(response.statusCode == 200){
-    print(response.body);
-    FlutterLocalNotification.showNotification(response.body);
-   }
-  }
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -45,8 +29,8 @@ class _HomePageState extends State<HomePage> {
             onPressed: SystemSettings.app,
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.all(10),
-              minimumSize: Size(w * 0.9, h * 0.2),
-              maximumSize: Size(w * 0.9, h * 0.2),
+              minimumSize: Size(w * 0.9, h * 0.22),
+              maximumSize: Size(w * 0.9, h * 0.22),
               backgroundColor: Color(0xffBAD7B3),
               elevation: 5,
               textStyle: const TextStyle(
@@ -80,8 +64,8 @@ class _HomePageState extends State<HomePage> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(10),
-                  minimumSize: Size(w * 0.45, h * 0.3),
-                  maximumSize: Size(w * 0.45, h * 0.3),
+                  minimumSize: Size(w * 0.45, h * 0.33),
+                  maximumSize: Size(w * 0.45, h * 0.33),
                   backgroundColor: Color(0xffBAD7B3),
                   elevation: 5,
                   textStyle: const TextStyle(
@@ -108,11 +92,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 )),
             ElevatedButton(
-                onPressed: () {Get.toNamed('/info');},
+                onPressed: () => Get.toNamed('/info'),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(10),
-                  minimumSize: Size(w * 0.45, h * 0.3),
-                  maximumSize: Size(w * 0.45, h * 0.3),
+                  minimumSize: Size(w * 0.45, h * 0.33),
+                  maximumSize: Size(w * 0.45, h * 0.33),
                   backgroundColor: Color(0xffBAD7B3),
                   elevation: 5,
                   textStyle: const TextStyle(
