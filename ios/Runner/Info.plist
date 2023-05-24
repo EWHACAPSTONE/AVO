@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+  <!-- Background Processing -->
+  <key>UIBackgroundModes</key>
+<array>
+    <string>fetch</string> <!-- Background Fetch -->
+    <string>remote-notification</string> <!-- Remote Notifications -->
+</array>
+
+  
+  <!-- Task Schedulling -->
+  <key>BGTaskSchedulerPermittedIdentifiers</key>
+  <array>
+     <string>workmanager.background.task</string>
+  </array>
+  
+  <!-- Background Fetching -->
+  <key>UIBackgroundModes</key>
+  <array>
+	  <string>fetch</string>
+  </array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -28,6 +47,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>push-to-talk</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

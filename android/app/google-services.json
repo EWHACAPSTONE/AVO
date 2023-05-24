@@ -29,6 +29,13 @@
             {
               "client_id": "987814337438-b9jbts867mlvrjbtjsbii0e6f094njeh.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "987814337438-iqtood4aip4olqaaadji3jat238fah5k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AVOTest"
+              }
             }
           ]
         }

@@ -11,6 +11,9 @@ import Flutter
    UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
    }
     GeneratedPluginRegistrant.register(with: self)
+     UIApplication.shared.setMinimumBackgroundFetchInterval(TimeInterval(5)) 
+
+    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
