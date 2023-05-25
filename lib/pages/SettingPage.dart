@@ -1,12 +1,9 @@
 import 'package:avo_front/controller/DropdownButtonController.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../utils/DropdownButtonWidget.dart';
 
 class settingPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(DropdownButtonController());
@@ -14,8 +11,8 @@ class settingPage extends StatelessWidget {
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-              children: [
+      child: Column(
+        children: [
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.fromLTRB(15, 35, 0, 0),
@@ -52,23 +49,27 @@ class settingPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 20),
                   dropdownTitle("아이가 울어요"),
-                  Obx(
-                    ()=> DropdownButtonWidget( selectedValue: controller.crySelected.value,
-                              onChanged: (value) =>controller.updateCrySelected(value!))
-                  ),
+                  Obx(() => DropdownButtonWidget(
+                      selectedValue: controller.crySelected.value,
+                      onChanged: (value) =>
+                          controller.updateCrySelected(value!))),
                   dropdownTitle("아이가 불러요"),
-                  Obx
-                  (()=>DropdownButtonWidget(selectedValue:controller.callSelected.value,
-                              onChanged: (value)=>controller.updateCallSelected(value!)),
+                  Obx(
+                    () => DropdownButtonWidget(
+                        selectedValue: controller.callSelected.value,
+                        onChanged: (value) =>
+                            controller.updateCallSelected(value!)),
                   ),
                   dropdownTitle("아이가 소리질러요"),
-                   Obx(() =>   DropdownButtonWidget(selectedValue: controller.shoutSelected.value,
-              onChanged: (value) =>controller.updateShoutSelected(value!))),
+                  Obx(() => DropdownButtonWidget(
+                      selectedValue: controller.shoutSelected.value,
+                      onChanged: (value) =>
+                          controller.updateShoutSelected(value!))),
                 ],
               ))
-              ],
-            ),
-        ));
+        ],
+      ),
+    ));
   }
 
   Container dropdownTitle(String title) {

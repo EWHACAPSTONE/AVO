@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class informationPage extends StatelessWidget{
-
-
-
-
+class informationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     var w = MediaQuery.of(context).size.width;
+    var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-              children: [
+      child: Column(
+        children: [
           Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.fromLTRB(15, 35, 0, 0),
@@ -39,13 +35,9 @@ class informationPage extends StatelessWidget{
             ],
           ),
           Image(image: (AssetImage('images/avo_4.png')), width: w * 0.9),
-           Image(image: (AssetImage('images/avoInfo.png')), width: w * 0.9),
-        
-              ],
-            ),
-        ));
+          Image(image: (AssetImage('images/avoInfo.png')), width: w * 0.9),
+        ],
+      ),
+    ));
   }
-
- 
-
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class DropdownButtonWidget extends StatelessWidget {
-  final String selectedValue; 
+  final String selectedValue;
   final void Function(String?) onChanged;
 
-  DropdownButtonWidget({ required this.selectedValue,
+  DropdownButtonWidget({
+    required this.selectedValue,
     required this.onChanged,
-}); 
-  final List<String> _options = ['한 번 진동', '두 번 진동', '세 번 진동', '연속 진동']; 
+  });
+  final List<String> _options = ['한 번 진동', '두 번 진동', '세 번 진동', '연속 진동'];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,15 +37,15 @@ class DropdownButtonWidget extends StatelessWidget {
               color: Colors.black),
           dropdownColor: Color.fromRGBO(255, 255, 255, 0.9),
           borderRadius: BorderRadius.circular(10),
-          value: selectedValue, 
-          items: _options
-              .map(
-                (item) {return DropdownMenuItem<String>(
-                  value: item, 
-                  child: Text(item),
-                );},
-              )
-              .toList(),
+          value: selectedValue,
+          items: _options.map(
+            (item) {
+              return DropdownMenuItem<String>(
+                value: item,
+                child: Text(item),
+              );
+            },
+          ).toList(),
           onChanged: onChanged,
         ),
       ),

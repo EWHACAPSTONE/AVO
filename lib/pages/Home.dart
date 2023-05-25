@@ -1,17 +1,15 @@
-import 'package:avo_front/utils/setting_vibration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vibration/vibration.dart';
-import 'package:http/http.dart' as http;
 import 'package:system_settings/system_settings.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
