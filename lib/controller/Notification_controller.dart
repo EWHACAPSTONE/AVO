@@ -1,16 +1,13 @@
 import 'package:avo_front/controller/DropdownButtonController.dart';
-import 'package:avo_front/utils/setting_vibration.dart';
+import 'package:avo_front/utils/setting_notification.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
-
 class NotificationController extends GetxController {
-
-  
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
 
   @override
   void onInit() async {
@@ -24,7 +21,6 @@ class NotificationController extends GetxController {
       sound: true,
     );
 
-
     _getToken();
     _onMessage();
     super.onInit();
@@ -33,10 +29,8 @@ class NotificationController extends GetxController {
   void _getToken() async {
     try {
       String? token = await messaging.getToken();
-      print("토큰 : $token");
-    } catch (e) {
-      print("에러");
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   final AndroidNotificationChannel channel = const AndroidNotificationChannel(
@@ -46,17 +40,20 @@ class NotificationController extends GetxController {
     importance: Importance.max,
   );
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   void _onMessage() async {
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
-    AndroidInitializationSettings androidInitializationSettings = const AndroidInitializationSettings('mipmap/ic_launcher');
+    AndroidInitializationSettings androidInitializationSettings =
+        const AndroidInitializationSettings('mipmap/ic_launcher');
 
-    DarwinInitializationSettings iosInitializationSettings = const DarwinInitializationSettings(
+    DarwinInitializationSettings iosInitializationSettings =
+        const DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -73,52 +70,11 @@ class NotificationController extends GetxController {
       final controller = Get.put(DropdownButtonController());
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
-      print(message.notification);
-      
-      if (notification != null && android != null) {
-        var situation = message.notification!.body;
-        switch (situation) {
-          case "shouting":
-            await flutterLocalNotificationsPlugin.show(
-              0,
-              'AVO',
-              '아이가 소리지르는게 감지됐어요!\n아이에게 한 번 가보세요.',
-              NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description),
-              ),
-            );
-            SettingVibration.setVibrate(controller.shoutSelected.value);
-            break;
-          case "crying":
-            await flutterLocalNotificationsPlugin.show(
-              0,
-              'AVO',
-              '아이가 울고 있는 소리가 감지됐어요!\n아이에게 한 번 가보세요.',
-              NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description),
-              ),
-            );
-            SettingVibration.setVibrate(controller.crySelected.value);
-            break;
-          case "calling":
-            await flutterLocalNotificationsPlugin.show(
-              0,
-              'AVO',
-              '아이가 부르는 소리가 감지됐어요!\n아이에게 한 번 가보세요.',
-              NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description),
-              ),
-            );
-            SettingVibration.setVibrate(controller.callSelected.value);
-            break;
-        }
-      }
-      
-      print('foreground 상황에서 메시지를 받았다.');
-      print('Message data: ${message.data}');
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification!.body}');
-      }
+      await Firebase.initializeApp();
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      final snapshot =
+          await firestore.collection('alarm').doc('3a1YFfhx4HPeTdPvAXjJ').get();
+      SettingNotification.handleFirestoreSnapshot(snapshot, message);
     });
   }
 }
